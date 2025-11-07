@@ -20,7 +20,13 @@ export function calculateInitialVelocity(boxX, boxY, clickX, clickY) {
   
   // Normalize and scale the horizontal velocity
   const speed = 8 // Base horizontal speed
-  const vx = (dx / distance) * speed
+  let vx = (dx / distance) * speed
+  
+  // Ensure minimum horizontal velocity to prevent straight up/down
+  const minHorizontalVelocity = 2
+  if (Math.abs(vx) < minHorizontalVelocity) {
+    vx = vx >= 0 ? minHorizontalVelocity : -minHorizontalVelocity
+  }
   
   // Always start with upward velocity for the arc
   const vy = PHYSICS.INITIAL_VY
@@ -52,8 +58,14 @@ export function updateLlamaPhysics(llama, groundLevel, deltaTime = 1) {
   if (y >= groundLevel) {
     y = groundLevel // Clamp to ground
     
-    // Check if should stop
-    if (Math.abs(vy) < PHYSICS.STOP_THRESHOLD || bounceCount <= 0) {
+    // Apply bounce dampening first
+    const newVy = -Math.abs(vy) * PHYSICS.BOUNCE_DAMPENING
+    const newVx = vx * PHYSICS.FRICTION
+    
+    // Check if should stop (more aggressive threshold after bounce)
+    if (Math.abs(newVy) < PHYSICS.STOP_THRESHOLD * 2 || 
+        bounceCount <= 0 ||
+        (Math.abs(newVx) < PHYSICS.STOP_THRESHOLD && Math.abs(newVy) < 2)) {
       return {
         ...llama,
         x,
@@ -66,8 +78,8 @@ export function updateLlamaPhysics(llama, groundLevel, deltaTime = 1) {
     }
     
     // Bounce!
-    vy = -Math.abs(vy) * PHYSICS.BOUNCE_DAMPENING
-    vx *= PHYSICS.FRICTION
+    vy = newVy
+    vx = newVx
     bounceCount -= 1
   }
   
