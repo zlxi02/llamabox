@@ -1,6 +1,8 @@
 # 🦙 LlamaBox
 
-An interactive React app where clicking spawns llamas that fly in parabolic arcs and bounce realistically on the ground with 2D physics simulation.
+Llamas in a Box.
+
+An interactive React app where each click spawns llamas that fly in parabolic arcs and bounce realistically using a 2D physics simulation.
 
 ![LlamaBox Demo](demo.gif)
 
@@ -417,39 +419,6 @@ Prevents edge case where clicking straight up causes infinite tiny bounces.
 - **Vite** - Build tool and dev server
 - **Vanilla CSS** - Styling and animations
 - **requestAnimationFrame** - 60 FPS game loop
-
----
-
-## 📚 Key Learning Concepts
-
-### React
-- `useState` - Reactive state management
-- `useRef` - Persistent values without re-renders
-- `useEffect` - Side effects and cleanup
-- Custom hooks - Reusable logic (`usePhysics`)
-- Props - Parent-child communication
-- Dynamic rendering - `.map()` for lists
-
-### JavaScript
-- Event handling - Click events, propagation
-- Timers - `setTimeout`, `clearTimeout`
-- Animation - `requestAnimationFrame`
-- Vector math - Direction, magnitude, normalization
-- Object spreading - Immutable state updates
-
-### Physics
-- Kinematics - Position, velocity, acceleration
-- Gravity - Constant downward force
-- Collision detection - Ground plane intersection
-- Elastic collisions - Bounce with energy loss
-- Friction - Velocity dampening
-
-### CSS
-- Positioning - `absolute`, `fixed`, `transform`
-- Z-index layering - Depth management
-- 2D transforms - `rotate()`, `translate()`
-- Transitions - Smooth property changes
-- Animations - Keyframe sequences
 
 ---
 
