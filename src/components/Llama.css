@@ -1,0 +1,10 @@
+.llama {
+  position: absolute;
+  font-size: 3rem;
+  z-index: 10;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  transition: none; /* Will be moved by JS, not CSS */
+}
+

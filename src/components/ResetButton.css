@@ -1,6 +1,6 @@
 .reset-button {
   position: absolute;
-  bottom: 180px; /* Just above the ground (150px) + some spacing */
+  bottom: 70px; /* Below the box (box top is at 150 + 120 = 270px) + spacing */
   left: 50%;
   transform: translateX(-50%);
   padding: 12px 24px;
