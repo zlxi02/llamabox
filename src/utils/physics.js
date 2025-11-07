@@ -1,10 +1,10 @@
 // Physics constants
 export const PHYSICS = {
-  GRAVITY: 0.6,           // Pixels per frame^2
+  GRAVITY: 0.4,           // Pixels per frame^2
   INITIAL_VY: -15,        // Initial upward velocity
   BOUNCE_DAMPENING: 0.6,  // Energy retained on bounce (60%)
   FRICTION: 0.85,         // Horizontal friction
-  MAX_BOUNCES: 4,         // Number of bounces before stopping
+  MAX_BOUNCES: 5,         // Number of bounces before stopping
   STOP_THRESHOLD: 0.5,    // Velocity threshold to stop
   ROTATION_SPEED: 2,      // Rotation based on horizontal velocity
 }
