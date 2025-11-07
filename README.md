@@ -453,21 +453,6 @@ Prevents edge case where clicking straight up causes infinite tiny bounces.
 
 ---
 
-## 🚀 Running the Project
-
-```bash
-# Install dependencies
-npm install
-
-# Start dev server
-npm run dev
-
-# Build for production
-npm run build
-```
-
----
-
 ## 🎯 Future Enhancements
 
 - [ ] Sound effects (pop, bounce)
