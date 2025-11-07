@@ -7,10 +7,12 @@ function Llama({ id, x, y, rotation }) {
       style={{
         left: `${x}px`,
         top: `${y}px`,
-        transform: `rotate(${rotation}deg)`
+        '--rotation': `${rotation}deg`
       }}
     >
-      🦙
+      <div className="llama-inner" style={{ transform: `rotate(${rotation}deg)` }}>
+        🦙
+      </div>
     </div>
   )
 }

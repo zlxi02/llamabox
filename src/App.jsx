@@ -4,6 +4,8 @@ import Ground from './components/Ground'
 import Box from './components/Box'
 import ResetButton from './components/ResetButton'
 import Llama from './components/Llama'
+import { usePhysics } from './hooks/usePhysics'
+import { calculateInitialVelocity, PHYSICS } from './utils/physics'
 
 function App() {
   const [llamas, setLlamas] = useState([])
@@ -12,6 +14,15 @@ function App() {
   // Constants for positioning
   const GROUND_HEIGHT = 150
   const BOX_HEIGHT = 120
+  const LLAMA_SIZE = 48 // Approximate size of emoji at 3rem
+
+  // Calculate ground level for physics (where llama bottom should stop)
+  const groundLevel = typeof window !== 'undefined' 
+    ? window.innerHeight - GROUND_HEIGHT - LLAMA_SIZE 
+    : 0
+
+  // Use physics hook for animation
+  usePhysics(llamas, setLlamas, groundLevel)
 
   const handleClick = (e) => {
     // Get click position
@@ -22,15 +33,24 @@ function App() {
     const boxCenterX = window.innerWidth / 2
     const boxCenterY = window.innerHeight - GROUND_HEIGHT - BOX_HEIGHT / 2
 
-    // Create new llama at box position
+    // Calculate initial velocity toward click point
+    const { vx, vy } = calculateInitialVelocity(
+      boxCenterX,
+      boxCenterY,
+      clickX,
+      clickY
+    )
+
+    // Create new llama at box position with velocity
     const newLlama = {
       id: `llama-${nextIdRef.current++}`,
-      x: boxCenterX - 24, // Center the emoji (roughly 48px wide at 3rem)
-      y: boxCenterY - 24, // Center the emoji (roughly 48px tall at 3rem)
-      vx: 0, // velocity x (will use in Phase 4)
-      vy: 0, // velocity y (will use in Phase 4)
+      x: boxCenterX - LLAMA_SIZE / 2, // Center the emoji
+      y: boxCenterY - LLAMA_SIZE / 2, // Center the emoji
+      vx,
+      vy,
       rotation: 0,
-      state: 'spawning' // spawning, flying, bouncing, resting
+      bounceCount: PHYSICS.MAX_BOUNCES,
+      state: 'flying'
     }
 
     setLlamas(prev => [...prev, newLlama])

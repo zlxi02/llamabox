@@ -4,7 +4,22 @@
   z-index: 10;
   pointer-events: none;
   user-select: none;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
   transition: none; /* Will be moved by JS, not CSS */
+}
+
+.llama-inner {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  animation: llama-spawn 0.2s ease-out;
+}
+
+@keyframes llama-spawn {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
