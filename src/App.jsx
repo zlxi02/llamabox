@@ -43,8 +43,10 @@ function App() {
 
   return (
     <div className="app" onClick={handleClick}>
-      <h1>🦙 LlamaBox</h1>
-      <p>Click anywhere to spawn a llama!</p>
+      <div className="header" onClick={(e) => e.stopPropagation()}>
+        <h1>🦙 LlamaBox</h1>
+        <p>Click anywhere to spawn a llama!</p>
+      </div>
       
       <Box />
       <ResetButton onClick={handleReset} />
