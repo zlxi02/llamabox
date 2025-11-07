@@ -1,7 +1,7 @@
 .llama {
   position: absolute;
   font-size: 3rem;
-  z-index: 10;
+  /* z-index set dynamically in component based on position */
   pointer-events: none;
   user-select: none;
   transition: none; /* Will be moved by JS, not CSS */
