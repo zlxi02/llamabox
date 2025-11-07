@@ -49,17 +49,35 @@
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
-.box-top {
+.box-lid-left,
+.box-lid-right {
   position: absolute;
   top: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 110px;
+  width: 55px;
   height: 15px;
   background: linear-gradient(135deg, #654321 0%, #8B4513 50%, #654321 100%);
   border: 2px solid #4a2511;
   border-radius: 4px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  transition: transform 0.4s ease-out;
+}
+
+.box-lid-left {
+  left: 5px;
+  transform-origin: center left;
+}
+
+.box-lid-right {
+  right: 5px;
+  transform-origin: center right;
+}
+
+.box-lid-left.open {
+  transform: rotate(-135deg);
+}
+
+.box-lid-right.open {
+  transform: rotate(135deg);
 }
 
 /* Subtle bounce animation when page loads */

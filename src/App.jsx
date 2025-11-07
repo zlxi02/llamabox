@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import './App.css'
 import Ground from './components/Ground'
 import Box from './components/Box'
@@ -9,7 +9,9 @@ import { calculateInitialVelocity, PHYSICS } from './utils/physics'
 
 function App() {
   const [llamas, setLlamas] = useState([])
+  const [lidOpen, setLidOpen] = useState(false)
   const nextIdRef = useRef(0)
+  const lidTimerRef = useRef(null)
 
   // Constants for positioning
   const GROUND_HEIGHT = 150
@@ -54,12 +56,38 @@ function App() {
     }
 
     setLlamas(prev => [...prev, newLlama])
+
+    // Open the lid!
+    setLidOpen(true)
+
+    // Clear existing timer if there is one
+    if (lidTimerRef.current) {
+      clearTimeout(lidTimerRef.current)
+    }
+
+    // Start timer to close lid after 800ms
+    lidTimerRef.current = setTimeout(() => {
+      setLidOpen(false)
+    }, 800)
   }
 
   const handleReset = () => {
     setLlamas([])
     nextIdRef.current = 0
+    setLidOpen(false)
+    if (lidTimerRef.current) {
+      clearTimeout(lidTimerRef.current)
+    }
   }
+
+  // Cleanup timer on unmount
+  useEffect(() => {
+    return () => {
+      if (lidTimerRef.current) {
+        clearTimeout(lidTimerRef.current)
+      }
+    }
+  }, [])
 
   return (
     <div className="app" onClick={handleClick}>
@@ -68,7 +96,7 @@ function App() {
         <p>Click anywhere to spawn a llama!</p>
       </div>
       
-      <Box />
+      <Box isOpen={lidOpen} />
       <ResetButton onClick={handleReset} />
       <Ground />
 
