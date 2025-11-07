@@ -12,8 +12,8 @@ An interactive React app where each click spawns llamas that fly in parabolic ar
 - Llamas fly toward your click in realistic arcs
 - Physics-based bouncing with energy loss
 - Animated lid that opens when llamas spawn
-- Smooth 60 FPS animation using `requestAnimationFrame`
 - Reset button to clear all llamas
+- Smooth 60 FPS animation using `requestAnimationFrame`
 
 ---
 
